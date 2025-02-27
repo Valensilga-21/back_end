@@ -52,6 +52,7 @@ public class usuarioPublicoController {
     public ResponseEntity<authResponse> registro(@RequestBody registroRequest request) {
         var valido = true;
         authResponse response = new authResponse();
+
         if (authService.findByUsername(request.getUsername()).isPresent()) {
             valido = false;
             response.setEmailExists(true);
@@ -63,7 +64,7 @@ public class usuarioPublicoController {
             response = authService.registro(request);
             response.setMensaje("Se registró correctamente");
             //para envíar el correo electronico
-            // emailService.enviarCorreoBienvenida(request.getUsername(), request.getNombre_usuario());
+            emailService.enviarCorreoBienvenida(request.getUsername(), request.getNombre_usuario());
             return new ResponseEntity<authResponse>(response, HttpStatus.OK);
         }
         return new ResponseEntity<authResponse>(response, HttpStatus.OK);

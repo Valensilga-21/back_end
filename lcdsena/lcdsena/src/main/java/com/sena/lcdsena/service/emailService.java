@@ -16,37 +16,37 @@ public class emailService {
 
     public String enviarCorreoBienvenida(String destinatario, String nombre_usuario) {
         try {
-            String asunto = "¡Bienvenid@  " + nombre_usuario + "  a TuTurismo Neiva!";
-            String cuerpo = ""
-                    + "<body style=\"font-family: Arial, sans-serif; \">\r\n"
-                    + "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/dist/boxicons.js\"></script>"
-                    + "<div class=\"container\" style=\"width: 70%; background-color: #f4f4f4; margin: 0% 10% 0% 10%; \">\r\n"
-                    + "<div class=\"header\" style=\"background-color: #333; padding: 5px; text-align: center;\">\r\n"
-                    + " <img src=\"https://i.postimg.cc/vTxcSyPm/logo.png\" alt=\"TuTurismoNeiva Logo\" style=\"max-width: 100px; margin-right: 90%;\">\r\n"
-                    + "</div>\r\n"
-                    + "<div class=\"content\" style=\" text-align: center; color: #333;\">\r\n"
-                    + "<h1 style=\"font-size: 24px; font-weight: bold; margin-bottom: 20px;\">¡Hola " + nombre_usuario
-                    + "!</h1>\r\n"
-                    + "<p style=\"font-size: 16px; margin-bottom: 20px;\"> Nos complace darte la bienvenida a TuTurismoNeiva, la plataforma ideal para descubrir los encantos de la ciudad de Neiva.En TuTurismoNeiva encontrarás todo lo que necesitas para conocer la cultura Neivana, desde información sobre lugares de interés hasta su ubicación. ¡Estamos seguros de que TuTurismoNeiva te ayudará a vivir una experiencia inolvidable en la ciudad! ¡No dudes en contactarnos si tienes alguna pregunta! Gracias por unirte a nosotros. No olvides seguirnos en nuestras redes sociales.</p>\r\n"
-                    + "<br>TuTurismo Neiva\r\n"
-                    + "</div>\r\n"
-                    + "<div class=\"footer\" style=\"background-color: #333; color: #fff; padding: 10px; text-align: center; margin-top: 20px;\">\r\n"
-                    + "<a href=\"#\" style=\"color: #fff; text-decoration: none; margin: 0 10px;\">Términos y condiciones</a> | <a href=\"#\" style=\"color: #fff; text-decoration: none; margin: 0 10px;\">Política de privacidad</a>\r\n"
-                    + "<div>\r\n"
-                    + "<box-icon name='phone' type='solid' color='#ffffff'></box-icon>\r\n"
-                    + "<box-icon name='gmail' type='logo' color='#f7f5f5'></box-icon>\r\n"
-                    + "<box-icon name='instagram-alt' type='logo' color='#ffffff'></box-icon>\r\n"
-                    + "<box-icon name='tiktok' type='logo' color='#f9f7f7'></box-icon>\r\n"
-                    + "</div>\r\n"
-                    + "</div>\r\n"
-                    + "</div>\r\n"
-                    + " <script src=\"https://unpkg.com/boxicons@2.1.4/dist/boxicons.js\"></script>\r\n"
-                    + "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"\r\n"
-                    + "        integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\"\r\n"
-                    + "        crossorigin=\"anonymous\"></script>\r\n"
-                    + "\r\n"
-                    + "</body>";
-
+            String asunto = "SOLICITUD DE REGISTRO APROBADA";
+            String cuerpo = "<!DOCTYPE html>\n" +
+            "<html lang=\"en\">\n" +
+            "<head>\n" +
+            "    <meta charset=\"UTF-8\">\n" +
+            "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+            "    <title>Respuesta correo</title>\n" +
+            "</head>\n" +
+            "<body style=\"font-family: Arial, sans-serif; background-color: #f9fafb; margin: 0; padding: 0;\">\n" +
+            "    <section style=\"background-color: #f9fafb; padding: 20px;\">\n" +
+            "        <div style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; max-width: 600px; margin: auto;\">\n" +
+            "            <div style=\"width: 100%; padding: 30px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\">\n" +
+            "                <h1 style=\"margin-bottom: 10px; font-size: 24px; font-weight: bold; color: #1f2937;\">\n" +
+            "                    ¡Hola, [nombre_usuario]!\n" +
+            "                </h1>\n" +
+            "                <p style=\"font-size: 16px; color: #4b5563; margin: 10px 0;\">Queremos informarle que su solicitud de registro en nuestra plataforma ha sido aprobada. \n" +
+            "                    Si deseas ingresar, aquí te proporcionamos el enlace correspondiente para que inicies sesión en la plataforma.</p>\n" +
+            "                <a href=\"http://127.0.0.1:5501/Front-end/index.html\" style=\"color: #39A800; text-decoration: underline; font-weight: 500; font-size: 14px;\">http://127.0.0.1:5501/Front-end/index.html</a>\n" +
+            "                <p style=\"font-size: 16px; color: #4b5563; margin: 10px 0;\">Recuerda no compartir tus credenciales, mantén tu cuenta segura para evitar posibles ataques y \n" +
+            "                    obtener una mayor seguridad de tus datos.</p>\n" +
+            "                <p style=\"font-size: 16px; font-weight: bold; color: #1f2937; margin: 10px 0;\">¡Que tengas un excelente día! 😊</p>\n" +
+            "                <a href=\"/Front-end/index.html\" style=\"display: flex; align-items: center; margin-bottom: 20px; font-size: 24px; font-weight: 600; color: #1f2937;\">\n" +
+            "                    <img src=\"https://i.ibb.co/4ZY46W6j/LCD-removebg-2.png\" alt=\"logo\" style=\"width: 90px; margin-right: 10px; margin-top: 25px;\">\n" +
+            "                </a>\n" +
+            "                <hr>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </section>\n" +
+            "</body>\n" +
+            "</html>";
+            
             var retorno = enviarCorreo(destinatario, asunto, cuerpo);
             if (retorno) {
                 return "se envió correctamente";
@@ -55,8 +55,55 @@ public class emailService {
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
             return "Error al envíar " + e.getMessage();
+        }
+    }
+
+    public String enviarNotificacionRestablecerContra(String destinatario, String enlace) {
+        try {
+            String asunto = "RESTABLECIMIENTO DE CONTRASEÑA LCDSena";
+            String cuerpo = "<!DOCTYPE html>\r\n"
+            + "<html lang=\"en\">\r\n"
+            + "<head>\r\n"
+            + "    <meta charset=\"UTF-8\">\r\n"
+            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
+            + "    <title>Correo Olvidar contraseña</title>\r\n"
+            + "</head>\r\n"
+            + "<body style=\"font-family: Arial, sans-serif; background-color: #f9fafb; margin: 0; padding: 0;\">\r\n"
+            + "    <section style=\"background-color: #f9fafb; padding: 20px;\">\r\n"
+            + "        <div style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; max-width: 600px; margin: auto;\">\r\n"
+            + "            <div style=\"width: 100%; padding: 30px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\">\r\n"
+            + "                <h1 style=\"margin-bottom: 10px; font-size: 24px; font-weight: bold; color: #1f2937;\">\r\n"
+            + "                    ¡Hola, [nombre_usuario]!\r\n"
+            + "                </h1>\r\n"
+            + "                <p style=\"font-size: 16px; color: #4b5563; margin: 10px 0;\">Hemos recibido una solicitud para restablecer tu contraseña. \r\n"
+            + "                    ¿Fuiste tú quien realizó esta acción? Si es así, haz clic en el botón de abajo para restablecerla. \r\n"
+            + "                    Si no reconoces esta acción, por favor ignora este mensaje. Este enlace es válido por 15 minutos.</p>\r\n"
+            + "                <br>\r\n"
+            + "                <a href=\"" + enlace
+            + "\" style=\"display: inline-block; width: 100%; text-align: center; text-decoration: none; color: white; background-color: #39A800; padding: 10px; border-radius: 5px; font-weight: medium;\">Restablecer</a>\r\n"
+            + "                <p style=\"font-size: 16px; color: #4b5563; margin: 10px 0; margin-top: 25px;\">Recuerda mantener tu cuenta segura y nunca compartir tu contraseña.</p>\r\n"
+            + "                <p style=\"font-size: 16px; font-weight: bold; color: #1f2937; margin: 10px 0;\">¡Que tengas un excelente día!</p>\r\n"
+            + "                <br>\r\n"
+            + "                <a href=\"/Front-end/index.html\" style=\"display: flex; align-items: center; margin-bottom: 20px; font-size: 24px; font-weight: 600; color: #1f2937;\">\r\n"
+            + "                    <img src=\"https://i.ibb.co/4ZY46W6j/LCD-removebg-2.png\" alt=\"logo\" style=\"width: 90px; margin-right: 10px; margin-top: 25px;\">\r\n"
+            + "                </a>\r\n"
+            + "                <hr>\r\n"
+            + "            </div>\r\n"
+            + "        </div>\r\n"
+            + "    </section>\r\n"
+            + "</body>\r\n"
+            + "</html>";
+
+            var retorno = enviarCorreo(destinatario, asunto, cuerpo);
+            if (retorno) {
+                return "Se envió correctamente";
+            } else {
+                return "No se pudo enviar";
+            }
+
+        } catch (Exception e) {
+            return "Error al enviar: " + e.getMessage();
         }
     }
 

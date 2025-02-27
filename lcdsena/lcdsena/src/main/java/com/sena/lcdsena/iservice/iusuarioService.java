@@ -15,6 +15,7 @@ public interface iusuarioService {
     public String save (usuario usuario);
     public List<usuario> findAll();
     public Optional<usuario> findOne(String id);
+    public List<usuario> filtroUsuario(String filtro);
     public Optional<usuario> findByUsername(String username);
     public authResponse registro(registroRequest request);
     public void savePasswordResetToken(usuario usuario, String token);

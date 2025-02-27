@@ -60,6 +60,12 @@ public class usuarioService implements iusuarioService {
     }
 
     @Override
+    public List<usuario> filtroUsuario(String filtro) {
+        List<usuario> listaUsuarios = data.filtroUsuario(filtro);
+        return listaUsuarios;
+    }
+
+    @Override
     public Optional<usuario> findOne(String id) {
         Optional<usuario> usuario = data.findById(id);
         return usuario; 

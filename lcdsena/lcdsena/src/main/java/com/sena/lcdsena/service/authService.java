@@ -32,6 +32,9 @@ public class authService implements iusuarioService{
     private final AuthenticationManager authenticationManager;
 
     @Autowired
+    private iusuario data;
+
+    @Autowired
     private UserDetailsService userDetailsService; // Inyectamos UserDetailsService
 
     // registro de usuarios
@@ -99,14 +102,12 @@ public class authService implements iusuarioService{
 
     @Override
     public byte[] exportPdf() throws JRException, FileNotFoundException {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'exportPdf'");
     }
 
 
     @Override
     public byte[] exportXls() throws JRException, FileNotFoundException {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'exportXls'");
     }
 
@@ -122,6 +123,13 @@ public class authService implements iusuarioService{
     public Optional<usuario> findOne(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findOne'");
+    }
+
+
+    @Override
+    public List<usuario> filtroUsuario(String filtro) {
+        List<usuario> listaUsuarios = data.filtroUsuario(filtro);
+        return listaUsuarios;
     }
 
 }

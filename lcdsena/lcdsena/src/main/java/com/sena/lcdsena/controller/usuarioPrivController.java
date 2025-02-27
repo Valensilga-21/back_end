@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sena.lcdsena.model.respuestaCambioContra;
 import com.sena.lcdsena.model.usuario;
 import com.sena.lcdsena.service.authService;
+import com.sena.lcdsena.service.emailService;
 import com.sena.lcdsena.service.usuarioService;
 import lombok.RequiredArgsConstructor;
 
@@ -42,6 +43,9 @@ public class usuarioPrivController {
     @Autowired
     private usuarioService usuarioService;
 
+    @Autowired
+    private emailService emailService;
+
     @GetMapping("/")
     public ResponseEntity<Object> findAll() {
         var listaUsuario = usuarioService.findAll();
@@ -52,6 +56,12 @@ public class usuarioPrivController {
     public ResponseEntity<Object> findOne(@PathVariable String id) {
         var usuario = usuarioService.findOne(id);
         return new ResponseEntity<>(usuario, HttpStatus.OK);
+    }
+
+    @GetMapping("/busquedaFiltro/{filtro}")
+    public ResponseEntity<Object> findFiltro(@PathVariable String filtro) {
+        var listaUsuarios = usuarioService.filtroUsuario(filtro);
+        return new ResponseEntity<>(listaUsuarios, HttpStatus.OK);
     }
 
     @GetMapping("profile/")
@@ -168,23 +178,23 @@ public class usuarioPrivController {
 	        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	    }
 
-	    java.util.Optional<usuario> optionalusuario = usuarioService.findByUsername(request.getUsername());
+	    java.util.Optional<usuario> optionalUsuario = usuarioService.findByUsername(request.getUsername());
 
-	    if (!optionalusuario.isPresent()) {
+	    if (!optionalUsuario.isPresent()) {
 	        response.put("message", "El usuario no existe");
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 
-	    usuario usuario = optionalusuario.get();
+	    usuario usuario = optionalUsuario.get();
 	    String token = UUID.randomUUID().toString();
 	    usuarioService.savePasswordResetToken(usuario, token);
 
-	    String enlace = "http://127.0.0.1:5502/Front-end/html/recuperarContrasena.html?u=" + 
+	    String enlace = "http://127.0.0.1:5501/Front-end/html/restablecercontraseña.html?u=" + 
 	    	    Base64.getEncoder().encodeToString(usuario.getUsername().getBytes()) + 
 	    	    "&t=" + token;
 
 
-	    // emailService. enviarNotificacionRecuperarContra(usuario.getUsername(), enlace);
+	    emailService.enviarNotificacionRestablecerContra(usuario.getUsername(), enlace);
 
 	    response.put("message", "Se ha enviado un enlace para recuperar la contraseña");
 	    return new ResponseEntity<>(response, HttpStatus.OK);
@@ -202,8 +212,8 @@ public class usuarioPrivController {
 	    return tieneMayuscula && tieneNumero && tieneCaracterEspecial;
 	}
 
-    @PutMapping("cambioRecuperacionContrasena/")
-	public ResponseEntity<respuestaCambioContra> cambiarContraseña(@RequestBody cambioRestablecerContrasenaRequest request) {
+    @PutMapping("cambioRestablecerContrasena/")
+	public ResponseEntity<respuestaCambioContra> restablecerContrasena(@RequestBody cambioRestablecerContrasenaRequest request) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    usuario usuario = (usuario) auth.getPrincipal();
 	    var respuesta = new respuestaCambioContra("", "");
