@@ -93,4 +93,15 @@ public class usuarioService implements iusuarioService {
     public byte[] exportXls() throws JRException, FileNotFoundException {
         return usuarioReporte.exportToXls(iusuarioRepository.findAll());
     }
+
+    @Override
+    public int delete(String id) {
+        try {
+            data.deleteById(id);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

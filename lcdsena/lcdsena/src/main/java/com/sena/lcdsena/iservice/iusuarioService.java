@@ -19,6 +19,7 @@ public interface iusuarioService {
     public Optional<usuario> findByUsername(String username);
     public authResponse registro(registroRequest request);
     public void savePasswordResetToken(usuario usuario, String token);
+    public int delete(String id_usuario);
 
     // PDF
     byte[] exportPdf() throws JRException, FileNotFoundException;

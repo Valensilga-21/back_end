@@ -132,4 +132,15 @@ public class authService implements iusuarioService{
         return listaUsuarios;
     }
 
+    @Override
+    public int delete(String id) {
+        try {
+            data.deleteById(id);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }

@@ -17,6 +17,7 @@ import com.sena.lcdsena.service.emailService;
 import com.sena.lcdsena.service.usuarioService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -252,4 +253,30 @@ public class usuarioPrivController {
 
 	    return new ResponseEntity<>(respuesta, HttpStatus.OK);
 	}
+
+    @DeleteMapping("/deshabilitar/{id_usuario}")
+    public ResponseEntity<Object> delete(@PathVariable String id_usuario) {
+        usuarioService.delete(id_usuario);
+        return new ResponseEntity<>("Usuario deshabilitado", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable String id, @RequestBody usuario usuarioUpdate) {
+        var usuario = usuarioService.findOne(id).get();
+        if (usuario != null) {
+            usuario.setDocumento_usuario(usuarioUpdate.getDocumento_usuario());
+            usuario.setNombre_usuario(usuarioUpdate.getNombre_usuario());
+            usuario.setUsername(usuarioUpdate.getUsername());
+            usuario.setCentro(usuarioUpdate.getCentro());
+            usuario.setCargo(usuarioUpdate.getCargo());
+            usuario.setPassword(usuarioUpdate.getPassword());
+            usuario.setConfirm_contrasena(usuarioUpdate.getConfirm_contrasena());
+            usuario.setEstado_usuario(usuarioUpdate.getEstado_usuario());
+
+            usuarioService.save(usuario);
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No se pudieron guardar los cambios", HttpStatus.BAD_REQUEST);
+        }
+    }
 }
