@@ -138,6 +138,7 @@ public class usuarioPrivController {
                 data.save(usuario);
                 
                 return new ResponseEntity<>("Solicitud de registro aprobada.", HttpStatus.OK);
+                // emailService.enviarCorreoBienvenida(request.getUsername(), request.getNombre_usuario());
             } else {
                 return new ResponseEntity<>("Su solicitud ya ha sido aprobada o rechazada.", HttpStatus.BAD_REQUEST);
             }

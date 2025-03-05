@@ -67,7 +67,7 @@ public class usuarioPublicoController {
             response = authService.registro(request);
             response.setMensaje("Su solicitud de registro ha sido enviada correctamente.");
             //para envíar el correo electronico
-            // emailService.enviarCorreoBienvenida(request.getUsername(), request.getNombre_usuario());
+            emailService.enviarCorreoBienvenida(request.getUsername(), request.getNombre_usuario());
             return new ResponseEntity<authResponse>(response, HttpStatus.OK);
         }
         return new ResponseEntity<authResponse>(response, HttpStatus.OK);
