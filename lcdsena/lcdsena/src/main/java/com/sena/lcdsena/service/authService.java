@@ -1,14 +1,12 @@
 package com.sena.lcdsena.service;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import javax.naming.AuthenticationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,12 +14,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.sena.lcdsena.interfaces.IPasswordChangeTokenRepository;
+import com.sena.lcdsena.interfaces.IPasswordResetTokenRepository;
 import com.sena.lcdsena.interfaces.iusuario;
 import com.sena.lcdsena.iservice.iusuarioService;
 import com.sena.lcdsena.model.authResponse;
+import com.sena.lcdsena.model.cambiarContrasena;
 import com.sena.lcdsena.model.estadoUsuario;
 import com.sena.lcdsena.model.loginRequest;
 import com.sena.lcdsena.model.registroRequest;
+import com.sena.lcdsena.model.restablecerContrasena;
 import com.sena.lcdsena.model.role;
 import com.sena.lcdsena.model.usuario;
 import com.sena.lcdsena.model.usuarioNoAprobadoException;
@@ -40,6 +42,12 @@ public class authService implements iusuarioService{
 
     @Autowired
     private iusuario data;
+
+    @Autowired
+	private IPasswordResetTokenRepository tokenRepository;
+
+    @Autowired
+	private IPasswordChangeTokenRepository tokenChageRepository;
 
     @Autowired
     private UserDetailsService userDetailsService; // Inyectamos UserDetailsService
@@ -117,7 +125,23 @@ public class authService implements iusuarioService{
 
     @Override
 	public void savePasswordResetToken(usuario usuario, String token) {
-		// TODO Auto-generated method stub
+	    restablecerContrasena resetToken = new restablecerContrasena();
+	    resetToken.setUsuario(usuario);
+	    resetToken.setToken(token);
+	    resetToken.setExpiryDate(LocalDateTime.now().plusHours(24)); // Cambiado a 24 horas
+
+	    // Guarda el token en la base de datos
+	    tokenRepository.save(resetToken);
+	}
+
+    public void changePasswordResetToken(usuario usuario, String token) {
+	    cambiarContrasena resetChangeToken = new cambiarContrasena();
+	    resetChangeToken.setUsuario(usuario);
+	    resetChangeToken.setToken(token);
+	    resetChangeToken.setExpiryDate(LocalDateTime.now().plusHours(24)); // Cambiado a 24 horas
+
+	    // Guarda el token en la base de datos
+	    tokenChageRepository.save(resetChangeToken);
 	}
 
 

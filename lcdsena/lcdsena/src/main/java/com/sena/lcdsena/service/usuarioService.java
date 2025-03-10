@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.sena.lcdsena.interfaces.IPasswordChangeTokenRepository;
 import com.sena.lcdsena.interfaces.IPasswordResetTokenRepository;
 import com.sena.lcdsena.iservice.iusuarioService;
 import com.sena.lcdsena.model.authResponse;
+import com.sena.lcdsena.model.cambiarContrasena;
 import com.sena.lcdsena.model.estadoUsuario;
 import com.sena.lcdsena.model.restablecerContrasena;
 import com.sena.lcdsena.model.registroRequest;
@@ -38,6 +40,9 @@ public class usuarioService implements iusuarioService {
     @Autowired
 	private IPasswordResetTokenRepository tokenRepository;
 
+    @Autowired
+	private IPasswordChangeTokenRepository tokenChageRepository;
+
 	public void savePasswordResetToken(usuario usuario, String token) {
 	    restablecerContrasena resetToken = new restablecerContrasena();
 	    resetToken.setUsuario(usuario);
@@ -46,6 +51,16 @@ public class usuarioService implements iusuarioService {
 
 	    // Guarda el token en la base de datos
 	    tokenRepository.save(resetToken);
+	}
+
+	public void changePasswordResetToken(usuario usuario, String token) {
+	    cambiarContrasena resetChangeToken = new cambiarContrasena();
+	    resetChangeToken.setUsuario(usuario);
+	    resetChangeToken.setToken(token);
+	    resetChangeToken.setExpiryDate(LocalDateTime.now().plusHours(24)); // Cambiado a 24 horas
+
+	    // Guarda el token en la base de datos
+	    tokenChageRepository.save(resetChangeToken);
 	}
 
     @Override 

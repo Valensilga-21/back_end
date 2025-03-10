@@ -107,6 +107,49 @@ public class emailService {
         }
     }
 
+    public String enviarNotificacionCambiarContra(String destinatario, String enlaceCambio) {
+        try {
+            String asunto = "CAMBIO DE CONTRASEÑA LCDSena";
+            String cuerpo = "<!DOCTYPE html>"
+            + "<html lang='en'>"
+            + "<head>"
+            + "    <meta charset='UTF-8'>"
+            + "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+            + "    <title>Correo Cambiar contraseña</title>"
+            + "</head>"
+            + "<body style='background-color: #f9fafb; color: #111827; font-family: Arial, sans-serif;'>"
+            + "    <section style='display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; height: 100vh;'>"
+            + "        <div style='width: 100%; max-width: 400px; padding: 24px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);'>"
+            + "            <h1 style='margin-bottom: 8px; font-size: 20px; font-weight: bold; color: #111827;'>¡Hola, [nombre_usuario]!</h1>"
+            + "            <p style='font-size: 14px; color: #6b7280; padding: 4px;'>Hemos recibido una solicitud para cambiar tu contraseña actual. "
+            + "                ¿Fuiste tú quien realizó esta acción? Si es así, haz clic en el botón de abajo para cambiarla. "
+            + "                Si no reconoces esta acción, por favor ignora este mensaje.</p>"
+            + "            <br>"
+            + "            <a href=\"" + enlaceCambio
+            + "\" style='display: block; width: 100%; background-color: #39A800; color: white; font-weight: 500; font-size: 14px; padding: 8px 12px; text-align: center; text-decoration: none; border-radius: 8px;'>Cambiar contraseña</a>"
+            + "            <br><br>"
+            + "            <p style='font-size: 14px; color: #6b7280; padding: 4px;'>Recuerda mantener tu cuenta segura y nunca compartir tu contraseña.</p>"
+            + "            <p style='font-weight: 600; font-size: 14px; color: #111827; padding: 4px;'>¡Que tengas un excelente día! 😊</p>"
+            + "            <img src='https://oficinavirtualderadicacion.sena.edu.co/oficinavirtual/Resources/logoSenaNaranja.png' alt='logo' style='width: 47px; margin-right: 10px; margin-top: 25px;'>"
+            + "            <img src='https://i.ibb.co/4ZY46W6j/LCD-removebg-2.png' alt='logo' style='width: 90px; margin-right: 10px; margin-top: 25px;'>"
+            + "            <hr>"
+            + "        </div>"
+            + "    </section>"
+            + "</body>"
+            + "</html>";
+
+            var retorno = enviarCorreo(destinatario, asunto, cuerpo);
+            if (retorno) {
+                return "Se envió correctamente";
+            } else {
+                return "No se pudo enviar";
+            }
+
+        } catch (Exception e) {
+            return "Error al enviar: " + e.getMessage();
+        }
+    }
+
     public boolean enviarCorreo(String destinatario, String asunto, String cuerpo) throws MessagingException {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();

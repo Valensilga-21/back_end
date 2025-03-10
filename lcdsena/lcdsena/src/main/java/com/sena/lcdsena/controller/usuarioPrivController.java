@@ -210,7 +210,7 @@ public class usuarioPrivController {
         usuarioService.save(user);
 
         // Enviar notificación por correo
-        // emailService.enviarNotificacionCambioContra(user.getUsername());
+        //emailService.enviarNotificacionCambioContra(user.getUsername());
         return ResponseEntity.status(HttpStatus.OK).body("Contraseña cambiada exitosamente");
     }
 
@@ -240,6 +240,37 @@ public class usuarioPrivController {
 
 
 	    emailService.enviarNotificacionRestablecerContra(usuario.getUsername(), enlace);
+
+	    response.put("message", "Se ha enviado un enlace para recuperar la contraseña");
+	    return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+    @PostMapping("notificacionCambioContrasena/")
+	public ResponseEntity<Map<String, String>> cambiarContrasena(@RequestBody cambiarContrasenaRequest request) {
+	    Map<String, String> response = new HashMap<>();
+
+	    if (request.getUsername() == null || request.getUsername().isEmpty()) {
+	        response.put("message", "El correo es un campo obligatorio");
+	        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	    }
+
+	    java.util.Optional<usuario> optionalUsuario = usuarioService.findByUsername(request.getUsername());
+
+	    if (!optionalUsuario.isPresent()) {
+	        response.put("message", "El usuario no existe");
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    }
+
+	    usuario usuario = optionalUsuario.get();
+	    String token = UUID.randomUUID().toString();
+	    usuarioService.changePasswordResetToken(usuario, token);
+
+	    String enlaceCambio = "http://127.0.0.1:5501/Front-end/html/cambiarcontra.html?u=" + 
+	    	    Base64.getEncoder().encodeToString(usuario.getUsername().getBytes()) + 
+	    	    "&t=" + token;
+
+
+	    emailService.enviarNotificacionCambiarContra(usuario.getUsername(), enlaceCambio);
 
 	    response.put("message", "Se ha enviado un enlace para recuperar la contraseña");
 	    return new ResponseEntity<>(response, HttpStatus.OK);
