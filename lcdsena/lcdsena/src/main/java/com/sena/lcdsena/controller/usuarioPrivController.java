@@ -55,7 +55,7 @@ public class usuarioPrivController {
     @Autowired
     private emailService emailService;
 
-    @GetMapping("/")
+    @GetMapping("/listaUsuarios/")
     public ResponseEntity<Object> findAll() {
         var listaUsuario = usuarioService.findAll();
         return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
@@ -344,8 +344,8 @@ public class usuarioPrivController {
             usuario.setUsername(usuarioUpdate.getUsername());
             usuario.setCentro(usuarioUpdate.getCentro());
             usuario.setCargo(usuarioUpdate.getCargo());
-            usuario.setPassword(usuarioUpdate.getPassword());
-            usuario.setConfirm_contrasena(usuarioUpdate.getConfirm_contrasena());
+            // usuario.setPassword(usuarioUpdate.getPassword());
+            // usuario.setConfirm_contrasena(usuarioUpdate.getConfirm_contrasena());
             usuario.setEstado_usuario(usuarioUpdate.getEstado_usuario());
 
             usuarioService.save(usuario);
