@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -55,7 +56,7 @@ public class usuarioPrivController {
     @Autowired
     private emailService emailService;
 
-    @GetMapping("/listaUsuarios/")
+    @GetMapping("/")
     public ResponseEntity<Object> findAll() {
         var listaUsuario = usuarioService.findAll();
         return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
@@ -68,10 +69,27 @@ public class usuarioPrivController {
     }
 
     @GetMapping("/busquedaFiltro/{filtro}")
-    public ResponseEntity<Object> findFiltro(@PathVariable String filtro) {
-        var listaUsuarios = usuarioService.filtroUsuario(filtro);
-        return new ResponseEntity<>(listaUsuarios, HttpStatus.OK);
+    public ResponseEntity<Object> findFiltro(@PathVariable String filtro, 
+                                         @RequestParam(required = false) String estado){
+
+        List<usuario> listaUsuarios;
+
+        estadoUsuario estadoEnum = null; // Inicializamos el estado como null
+
+        if (estado != null && !estado.isEmpty()) {
+            try {
+                estadoEnum = estadoUsuario.valueOf(estado.toUpperCase()); // Convertir a ENUM
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().body("Estado no válido");
+            }
+        }
+
+        // Llamamos al método con ambos filtros (puede ser null el estado)
+        listaUsuarios = usuarioService.filtroUsuario(filtro, estadoEnum);
+
+        return ResponseEntity.ok(listaUsuarios);
     }
+
 
     @GetMapping("profile/")
     public ResponseEntity<usuario> getProfile() {
@@ -239,7 +257,7 @@ public class usuarioPrivController {
 	    	    "&t=" + token;
 
 
-	    emailService.enviarNotificacionRestablecerContra(usuario.getUsername(), enlace);
+	    emailService.enviarNotificacionRestablecerContra(usuario.getUsername(), enlace, usuario.getNombre_usuario());
 
 	    response.put("message", "Se ha enviado un enlace para recuperar la contraseña");
 	    return new ResponseEntity<>(response, HttpStatus.OK);
@@ -270,7 +288,7 @@ public class usuarioPrivController {
 	    	    "&t=" + token;
 
 
-	    emailService.enviarNotificacionCambiarContra(usuario.getUsername(), enlaceCambio);
+	    emailService.enviarNotificacionCambiarContra(usuario.getUsername(), enlaceCambio, usuario.getNombre_usuario());
 
 	    response.put("message", "Se ha enviado un enlace para recuperar la contraseña");
 	    return new ResponseEntity<>(response, HttpStatus.OK);
@@ -347,6 +365,7 @@ public class usuarioPrivController {
             // usuario.setPassword(usuarioUpdate.getPassword());
             // usuario.setConfirm_contrasena(usuarioUpdate.getConfirm_contrasena());
             usuario.setEstado_usuario(usuarioUpdate.getEstado_usuario());
+            usuario.setRole(usuarioUpdate.getRole());
 
             usuarioService.save(usuario);
             return new ResponseEntity<>(usuario, HttpStatus.OK);

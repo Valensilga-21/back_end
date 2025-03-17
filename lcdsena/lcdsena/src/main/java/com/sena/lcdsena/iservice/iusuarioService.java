@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sena.lcdsena.model.authResponse;
+import com.sena.lcdsena.model.estadoUsuario;
 import com.sena.lcdsena.model.registroRequest;
 import com.sena.lcdsena.model.usuario;
 
@@ -15,7 +16,7 @@ public interface iusuarioService {
     public String save (usuario usuario);
     public List<usuario> findAll();
     public Optional<usuario> findOne(String id);
-    public List<usuario> filtroUsuario(String filtro);
+    List<usuario> filtroUsuario(String filtro, estadoUsuario estado);
     public Optional<usuario> findByUsername(String username);
     public authResponse registro(registroRequest request);
     public void savePasswordResetToken(usuario usuario, String token);

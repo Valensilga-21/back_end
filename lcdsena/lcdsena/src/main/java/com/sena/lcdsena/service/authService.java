@@ -44,6 +44,9 @@ public class authService implements iusuarioService{
     private iusuario data;
 
     @Autowired
+    private iusuario iusuario;
+
+    @Autowired
 	private IPasswordResetTokenRepository tokenRepository;
 
     @Autowired
@@ -85,7 +88,7 @@ public class authService implements iusuarioService{
         }
 
         String Token = jwtService.getToken(usuario);
-        return authResponse.builder().Token(Token).mensaje("Acceso Permitido").emailExists(false).build();
+        return authResponse.builder().Token(Token).mensaje("Acceso Permitido").emailExists(false).role(usuario.getRole()).build();
     }
 
     public Optional<authResponse> verificarToken(String Token) {
@@ -115,7 +118,6 @@ public class authService implements iusuarioService{
     public Optional<usuario> findByUsername(String username) {
         return dataUser.findByUsername(username);
     }
-
 
     @Override
     public String save(usuario usuario) {
@@ -172,9 +174,8 @@ public class authService implements iusuarioService{
 
 
     @Override
-    public List<usuario> filtroUsuario(String filtro) {
-        List<usuario> listaUsuarios = data.filtroUsuario(filtro);
-        return listaUsuarios;
+    public List<usuario> filtroUsuario(String filtro, estadoUsuario estado) {
+        return iusuario.filtroUsuario(filtro, estado);
     }
 
     @Override

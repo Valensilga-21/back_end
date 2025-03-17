@@ -1,9 +1,12 @@
 package com.sena.lcdsena.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +30,7 @@ public class viaje {
     private String id_viaje;
  
     @Column(name = "num_comision", nullable = false, length = 6)
-    private String num_comision;
+    private int num_comision;
  
     @Column(name = "fecha_inicio", nullable = false, length = 36)
     private Date fecha_inicio;
@@ -37,9 +40,9 @@ public class viaje {
  
     @Column(name = "ruta", nullable = false, length = 100)
     private String ruta;
- 
-    @Column(name = "estado_viaje", nullable = false, length = 36)
-    private String estado_viaje;
+
+    @Enumerated(EnumType.STRING)
+    private estadoViaje estado_viaje;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")

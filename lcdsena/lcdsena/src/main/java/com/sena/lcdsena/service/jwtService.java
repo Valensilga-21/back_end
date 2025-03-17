@@ -35,7 +35,7 @@ public class jwtService {
 
     }
     
-    private String createToken(HashMap<String, Object> extraClaims, String subject) {
+    public String createToken(HashMap<String, Object> extraClaims, String subject) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims) // Agregar los claims

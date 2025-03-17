@@ -29,7 +29,7 @@ public class emailService {
             "        <div style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; max-width: 600px; margin: auto;\">\n" +
             "            <div style=\"width: 100%; padding: 30px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\">\n" +
             "                <h1 style=\"margin-bottom: 10px; font-size: 24px; font-weight: bold; color: #1f2937;\">\n" +
-            "                    ¡Hola, [nombre_usuario]!\n" +
+            "                    ¡Hola, " + nombre_usuario + "!" + "\n" +
             "                </h1>\n" +
             "                <p style=\"font-size: 16px; color: #4b5563; margin: 10px 0;\">Queremos informarle que su solicitud de registro en nuestra plataforma ha sido aprobada. \n" +
             "                    Si deseas ingresar, aquí te proporcionamos el enlace correspondiente para que inicies sesión en la plataforma.</p>\n" +
@@ -59,7 +59,7 @@ public class emailService {
         }
     }
 
-    public String enviarNotificacionRestablecerContra(String destinatario, String enlace) {
+    public String enviarNotificacionRestablecerContra(String destinatario, String enlace, String nombre_usuario) {
         try {
             String asunto = "RESTABLECIMIENTO DE CONTRASEÑA LCDSena";
             String cuerpo = "<!DOCTYPE html>\r\n"
@@ -74,7 +74,7 @@ public class emailService {
             + "        <div style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; max-width: 600px; margin: auto;\">\r\n"
             + "            <div style=\"width: 100%; padding: 30px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\">\r\n"
             + "                <h1 style=\"margin-bottom: 10px; font-size: 24px; font-weight: bold; color: #1f2937;\">\r\n"
-            + "                    ¡Hola, [nombre_usuario]!\r\n"
+            + "                    ¡Hola, " + nombre_usuario + "!" + "\r\n"
             + "                </h1>\r\n"
             + "                <p style=\"font-size: 16px; color: #4b5563; margin: 10px 0;\">Hemos recibido una solicitud para restablecer tu contraseña. \r\n"
             + "                    ¿Fuiste tú quien realizó esta acción? Si es así, haz clic en el botón de abajo para restablecerla. \r\n"
@@ -107,7 +107,7 @@ public class emailService {
         }
     }
 
-    public String enviarNotificacionCambiarContra(String destinatario, String enlaceCambio) {
+    public String enviarNotificacionCambiarContra(String destinatario, String enlaceCambio, String nombre_usuario) {
         try {
             String asunto = "CAMBIO DE CONTRASEÑA LCDSena";
             String cuerpo = "<!DOCTYPE html>"
@@ -120,7 +120,7 @@ public class emailService {
             + "<body style='background-color: #f9fafb; color: #111827; font-family: Arial, sans-serif;'>"
             + "    <section style='display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; height: 100vh;'>"
             + "        <div style='width: 100%; max-width: 400px; padding: 24px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);'>"
-            + "            <h1 style='margin-bottom: 8px; font-size: 20px; font-weight: bold; color: #111827;'>¡Hola, [nombre_usuario]!</h1>"
+            + "            <h1 style='margin-bottom: 8px; font-size: 20px; font-weight: bold; color: #111827;'>¡Hola, " + nombre_usuario + "!" + "\r\n</h1>"
             + "            <p style='font-size: 14px; color: #6b7280; padding: 4px;'>Hemos recibido una solicitud para cambiar tu contraseña actual. "
             + "                ¿Fuiste tú quien realizó esta acción? Si es así, haz clic en el botón de abajo para cambiarla. "
             + "                Si no reconoces esta acción, por favor ignora este mensaje.</p>"

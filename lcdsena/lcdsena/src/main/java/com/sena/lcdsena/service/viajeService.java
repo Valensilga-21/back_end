@@ -1,5 +1,7 @@
 package com.sena.lcdsena.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +39,17 @@ public class viajeService implements iviajeService{
 
    @Override
     public List<viaje> filtroViaje(String filtro) {
-        List<viaje> listaViajes=data.filtroViaje(filtro);
-        return listaViajes;
+        LocalDate fecha = null;
+
+        try {
+            fecha = LocalDate.parse(filtro); // Intenta convertir a fecha
+        } catch (DateTimeParseException e) {
+            // No es una fecha, ignorar
+        }
+
+        return data.filtroViaje(filtro, fecha);
     }
+
 
     @Override
     public int delete(String id) {

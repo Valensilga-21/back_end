@@ -32,6 +32,9 @@ public class usuarioService implements iusuarioService {
     private iusuario data;
 
     @Autowired
+    private iusuario iusuario;
+
+    @Autowired
     private iusuarioRepository iusuarioRepository;
 
     @Autowired
@@ -76,10 +79,10 @@ public class usuarioService implements iusuarioService {
     }
 
     @Override
-    public List<usuario> filtroUsuario(String filtro) {
-        List<usuario> listaUsuarios = data.filtroUsuario(filtro);
-        return listaUsuarios;
+    public List<usuario> filtroUsuario(String filtro, estadoUsuario estado) {
+        return iusuario.filtroUsuario(filtro, estado);
     }
+
 
     @Override
     public Optional<usuario> findOne(String id) {
