@@ -21,6 +21,8 @@ import com.sena.lcdsena.iservice.iusuarioService;
 import com.sena.lcdsena.model.authResponse;
 import com.sena.lcdsena.model.cambiarContrasena;
 import com.sena.lcdsena.model.estadoUsuario;
+import com.sena.lcdsena.model.legalizacion;
+import com.sena.lcdsena.model.legalizacionRequest;
 import com.sena.lcdsena.model.loginRequest;
 import com.sena.lcdsena.model.registroRequest;
 import com.sena.lcdsena.model.restablecerContrasena;
@@ -88,7 +90,7 @@ public class authService implements iusuarioService{
         }
 
         String Token = jwtService.getToken(usuario);
-        return authResponse.builder().Token(Token).mensaje("Acceso Permitido").emailExists(false).role(usuario.getRole()).build();
+        return authResponse.builder().Token(Token).mensaje("Acceso Permitido").emailExists(false).role(usuario.getRole()).id_usuario(usuario.getId_usuario()).nombre_usuario(usuario.getNombre_usuario()).build();
     }
 
     public Optional<authResponse> verificarToken(String Token) {

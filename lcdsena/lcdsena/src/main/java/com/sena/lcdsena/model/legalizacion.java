@@ -1,13 +1,18 @@
 package com.sena.lcdsena.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,11 +33,16 @@ public class legalizacion {
     @Column(name = "moti_devolucion", nullable = false, length = 5000)
     private String moti_devolucion;
 
-    @Column(name = "fecha_soli", nullable = false, length = 12)
-    private String fecha_soli;
+    @Column(name = "fecha_solicitud", nullable = false, updatable = false)
+    private LocalDate fechaSolicitud;
 
-    @Column(name = "estado_lega", nullable = false, length = 20)
-    private String estado_lega;
+    @PrePersist
+    protected void onCreate() {
+        this.fechaSolicitud = LocalDate.now();
+    }
+
+    @Enumerated(EnumType.STRING)
+    private estadoLegalizacion estado_lega;
 
     @Column(name = "pdf", nullable = true, columnDefinition = "MEDIUMBLOB")
     private String pdf;

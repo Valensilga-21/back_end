@@ -1,7 +1,6 @@
 package com.sena.lcdsena.model;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,7 +44,6 @@ public class viaje {
     private estadoViaje estado_viaje;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private usuario usuario;
-    
 }

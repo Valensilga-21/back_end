@@ -15,4 +15,5 @@ public class authResponse {
     private boolean emailExists;
     private String nombre_usuario;
     private role role;
+    private String id_usuario;
 }

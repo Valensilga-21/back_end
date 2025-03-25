@@ -50,11 +50,11 @@ public class legalizacionService implements ilegalizacionService{
         return legalizacion;
     }
 
-    @Override
-    public List<legalizacion> filtroLegalizacion(String filtro){
-        List<legalizacion> listaLegalizaciones=data.filtroLegalizacion(filtro);
-        return listaLegalizaciones;
-    }
+    // @Override
+    // public List<legalizacion> filtroLegalizacion(String filtro){
+    //     List<legalizacion> listaLegalizaciones=data.filtroLegalizacion(filtro);
+    //     return listaLegalizaciones;
+    // }
 
     @Override
     public int delete(String id){
@@ -68,18 +68,18 @@ public class legalizacionService implements ilegalizacionService{
     }
 
     //CONTADORES
-    public long contarVencidas() {
-        Date fechaLimite = Date.valueOf(LocalDate.now().minusDays(5));
-        return ilegalizacion.findVencidas(fechaLimite).size();
-    }
+    // public long contarVencidas() {
+    //     Date fechaLimite = Date.valueOf(LocalDate.now().minusDays(5));
+    //     return ilegalizacion.findVencidas(fechaLimite).size();
+    // }
 
-    public long contarPendientes() {
-        Date fechaLimite = Date.valueOf(LocalDate.now());
-        return ilegalizacion.findPendientes(fechaLimite).size();
-    }
+    // public long contarPendientes() {
+    //     Date fechaLimite = Date.valueOf(LocalDate.now());
+    //     return ilegalizacion.findPendientes(fechaLimite).size();
+    // }
 
-    public long contarCompletadas() {
-        Date fechaLimite = Date.valueOf(LocalDate.now());
-        return ilegalizacion.findCompletadas(fechaLimite).size();
-    }
+    // public long contarCompletadas() {
+    //     Date fechaLimite = Date.valueOf(LocalDate.now());
+    //     return ilegalizacion.findCompletadas(fechaLimite).size();
+    // }
 }

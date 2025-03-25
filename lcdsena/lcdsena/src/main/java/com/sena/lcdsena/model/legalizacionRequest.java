@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class viajeRequest {
+public class legalizacionRequest {
 
-    private int num_comision;
-    private LocalDate fecha_inicio;
-    private LocalDate fecha_fin;
-    private String ruta;
-    private estadoViaje estado_viaje;
+    private String moti_devolucion;
+    private LocalDate fecha_soli;
+    private estadoLegalizacion estado_lega;
+    private String pdf;
     private String id_usuario;
+    private String id_viaje;
 }
