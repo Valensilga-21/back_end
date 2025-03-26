@@ -69,7 +69,7 @@ public class authService implements iusuarioService{
                 .cargo(request.getCargo())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .confirm_contrasena(passwordEncoder.encode(request.getConfirm_contrasena()))
-                .estado_usuario(request.getEstado_Usuario())
+                .estado_usuario(request.getEstado_usuario())
                 .build();
         dataUser.save(userData);
         return authResponse.builder()

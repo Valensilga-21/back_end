@@ -63,7 +63,7 @@ public class usuarioPublicoController {
 
         if (valido) {
 
-            request.setEstado_Usuario(estadoUsuario.pendiente);
+            request.setEstado_usuario(estadoUsuario.pendiente);
             response = authService.registro(request);
             response.setMensaje("Su solicitud de registro ha sido enviada correctamente.");
             //para envíar el correo electronico

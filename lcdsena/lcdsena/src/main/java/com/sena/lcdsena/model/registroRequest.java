@@ -18,5 +18,6 @@ public class registroRequest {
     private cargo cargo;
     private String password;
     private String confirm_contrasena;
-    private estadoUsuario estado_Usuario;
+    private estadoUsuario estado_usuario;
+    private role role;
 }

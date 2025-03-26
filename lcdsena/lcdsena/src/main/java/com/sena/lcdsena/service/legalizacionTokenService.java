@@ -17,7 +17,7 @@ public class legalizacionTokenService {
     public String generarTokenLegalizacion(legalizacion legalizacion) {
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("id_legalizacion", legalizacion.getId_legalizacion());
-        claims.put("fecha_soli", legalizacion.getFechaSolicitud());
+        claims.put("fecha_soli", legalizacion.getFecha_soli());
         claims.put("moti_devolucion", legalizacion.getMoti_devolucion());
         claims.put("pdf", legalizacion.getPdf());
         claims.put("estado_lega", legalizacion.getEstado_lega() != null ? legalizacion.getEstado_lega().toString() : "N/A");

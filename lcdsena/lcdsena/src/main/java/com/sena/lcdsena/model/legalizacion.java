@@ -2,6 +2,8 @@ package com.sena.lcdsena.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -33,12 +35,13 @@ public class legalizacion {
     @Column(name = "moti_devolucion", nullable = false, length = 5000)
     private String moti_devolucion;
 
-    @Column(name = "fecha_solicitud", nullable = false, updatable = false)
-    private LocalDate fechaSolicitud;
+    @Column(name = "fecha_soli", nullable = false, updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate fecha_soli;
 
     @PrePersist
     protected void onCreate() {
-        this.fechaSolicitud = LocalDate.now();
+        this.fecha_soli = LocalDate.now();
     }
 
     @Enumerated(EnumType.STRING)
